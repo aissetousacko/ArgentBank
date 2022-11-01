@@ -5,18 +5,22 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
 import './styles/index.css'
+import { Provider } from 'react-redux'
+import { store } from './app/store'
 
 function App() {
   return (
     <div className="content">
       <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
-        </Routes>
-        <Footer />
+        <Provider store={store}>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+          <Footer />
+        </Provider>
       </BrowserRouter>
     </div>
   )
