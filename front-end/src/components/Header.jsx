@@ -7,7 +7,7 @@ import { logout } from '../features/auth/authSlice'
 const Header = () => {
   // const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { userToken, firstName } = useSelector((state) => state.auth)
+  const { userToken } = useSelector((state) => state.auth)
 
   const onLogout = () => {
     dispatch(logout())
@@ -27,10 +27,9 @@ const Header = () => {
 
       {userToken ? (
         <>
-          {console.log('user name: ', firstName)}
           <div className="mainNavItem">
             <i className="fa fa-user-circle"></i>
-            <span>{firstName}</span>
+            <span>{/* {firstName} */}USERNAME</span>
           </div>
           <Link to="/" className="main-nav-item" onClick={onLogout}>
             <i className="fa fa-sign-out"></i>
