@@ -23,12 +23,10 @@ const Login = () => {
     if (isError) {
       console.log(message)
     }
-
+    // redirect authenticated user to profile screen
     if (isSuccess || user) {
       navigate('/profile')
     }
-
-    // dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
   const onChange = (e) => {
