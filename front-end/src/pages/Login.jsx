@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 // import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { login } from '../features/auth/authSlice'
+import { login, isRemember } from '../features/auth/authSlice'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -15,9 +15,8 @@ const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  )
+  const { user, isLoading, isError, isSuccess, message, rememberMe } =
+    useSelector((state) => state.auth)
 
   useEffect(() => {
     if (isError) {
@@ -44,6 +43,14 @@ const Login = () => {
       password,
     }
     dispatch(login(userData))
+  }
+
+  const handleRememberMe = (e) => {
+    dispatch(isRemember(e.target.checked))
+  }
+
+  if (rememberMe === true) {
+    localStorage.setItem('token', user)
   }
 
   if (isLoading) {
@@ -80,17 +87,15 @@ const Login = () => {
           </div>
 
           <div className="input-remember">
-            <input type="checkbox" id="remember-me" />
+            <input
+              type="checkbox"
+              id="remember-me"
+              onChange={handleRememberMe}
+            />
             <label>Remember me</label>
           </div>
 
-          {/* <!-- PLACEHOLDER DUE TO STATIC SITE --> */}
-          {/* <Link to="/profile" className="sign-in-button">
-            Sign In
-          </Link> */}
-          {/* <!-- SHOULD BE THE BUTTON BELOW --> */}
           <button className="sign-in-button">Sign In</button>
-          {/* <!--  --> */}
         </form>
       </section>
     </main>

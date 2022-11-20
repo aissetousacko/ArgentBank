@@ -6,7 +6,6 @@ import authService from './authService'
 
 //* For access protected route, we need to get a token with JWT
 //* We gonna save the token in the localStorage
-//* Get user from localStorage
 const userToken = localStorage.getItem('token')
   ? localStorage.getItem('token')
   : null
@@ -19,6 +18,7 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: '',
+  rememberMe: false,
 }
 
 //*Login
@@ -88,15 +88,20 @@ export const authSlice = createSlice({
   reducers: {
     //logout
     logout: (state) => {
-      localStorage.removeItem('user')
+      localStorage.removeItem('token')
+      localStorage.clear()
       state.userToken = null
       state.isError = false
       state.isSuccess = false
       state.isLoading = false
       state.message = ''
+      state.rememberMe = false
+    },
+    //remember me
+    isRemember: (state, action) => {
+      state.rememberMe = action.payload
     },
   },
-  //remember me here
   extraReducers: (builder) => {
     builder
       //login
@@ -152,5 +157,5 @@ export const authSlice = createSlice({
   },
 })
 
-export const { logout } = authSlice.actions
+export const { logout, isRemember } = authSlice.actions
 export default authSlice.reducer

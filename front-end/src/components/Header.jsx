@@ -5,13 +5,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../features/auth/authSlice'
 
 const Header = () => {
-  // const navigate = useNavigate()
   const dispatch = useDispatch()
   const { userToken, firstName } = useSelector((state) => state.auth)
 
   const onLogout = () => {
     dispatch(logout())
-    // navigate('/')
   }
 
   return (

@@ -10,6 +10,7 @@ import './styles/login.css'
 import './styles/profile.css'
 import { Provider } from 'react-redux'
 import { store } from './app/store'
+import { ProtectedRoute } from './pages/ProtectedRoute'
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/profile" element={<Profile />} />
+            </Route>
           </Routes>
           <Footer />
         </Provider>

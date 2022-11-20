@@ -19,7 +19,7 @@ const Profile = () => {
     dispatch(profile())
   }, [userToken, navigate, dispatch])
 
-  //Edit form mode
+  //Edit form
   const [editNameForm, setEditNameForm] = useState(false)
   const [editBackground, setEditBackground] = useState(false)
 
@@ -29,7 +29,6 @@ const Profile = () => {
     setEditBackground(!editBackground)
   }
 
-  //form values
   const [updateFirstName, setUpdateFirstName] = useState('')
   const [updateLastName, setUpdateLastName] = useState('')
 
@@ -40,9 +39,8 @@ const Profile = () => {
       lastName: updateLastName ? updateLastName : lastName,
     }
     dispatch(updateData(userUpdateData))
-    console.log(userUpdateData)
+    //console.log(userUpdateData)
     setEditNameForm()
-    // setEditBackground()
   }
 
   return (
