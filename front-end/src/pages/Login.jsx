@@ -51,6 +51,8 @@ const Login = () => {
 
   if (rememberMe === true) {
     localStorage.setItem('token', user)
+  } else {
+    sessionStorage.setItem('token', user)
   }
 
   if (isLoading) {

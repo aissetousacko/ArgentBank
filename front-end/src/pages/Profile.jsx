@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { profile, updateData } from '../features/auth/authSlice'
+import { profile, updateData, logout } from '../features/auth/authSlice'
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -13,6 +13,8 @@ const Profile = () => {
 
   useEffect(() => {
     if (!userToken) {
+      localStorage.clear()
+      dispatch(logout())
       navigate('/login')
     }
     navigate('/profile')
@@ -21,12 +23,10 @@ const Profile = () => {
 
   //Edit form
   const [editNameForm, setEditNameForm] = useState(false)
-  const [editBackground, setEditBackground] = useState(false)
 
   const editForm = (e) => {
     e.preventDefault()
     setEditNameForm(!editNameForm)
-    setEditBackground(!editBackground)
   }
 
   const [updateFirstName, setUpdateFirstName] = useState('')
